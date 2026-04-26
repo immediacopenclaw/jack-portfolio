@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project — Jack Leahy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="brand-name">Jack Leahy</a>
+      <span class="brand-role">Director of Photography</span>
+    </div>
+    <nav class="site-nav">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="project-page">
+      <a class="project-back" href="index.html#work">← Back to work</a>
+      <div class="project-video" id="project-video"></div>
+      <h1 class="project-title" id="project-title">—</h1>
+      <div class="project-meta" id="project-meta"></div>
+      <dl class="project-credits" id="project-credits"></dl>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Jack Leahy</span>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const params = new URLSearchParams(location.search);
+    const slug = params.get('p');
+    const project = (window.PROJECTS || []).find(p => p.slug === slug);
+
+    if (!project) {
+      document.getElementById('project-title').textContent = 'Project not found';
+    } else {
+      document.title = `${project.title} — Jack Leahy`;
+      document.getElementById('project-title').textContent = project.title;
+      document.getElementById('project-meta').textContent = `Dir. ${project.director} · ${project.year}`;
+
+      const videoEl = document.getElementById('project-video');
+      if (project.video) {
+        if (project.videoType === 'embed') {
+          videoEl.innerHTML = `<iframe src="${project.video}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+        } else {
+          videoEl.innerHTML = `<video controls preload="metadata" ${project.poster ? `poster="${project.poster}"` : ''}><source src="${project.video}" type="video/mp4" />Your browser does not support video.</video>`;
+        }
+      } else {
+        videoEl.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#333;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;">Video coming soon</div>`;
+      }
+
+      const credits = project.credits || {};
+      const creditEntries = Object.entries(credits);
+      if (creditEntries.length) {
+        document.getElementById('project-credits').innerHTML = creditEntries
+          .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+      }
+    }
+  </script>
+</body>
+</html>
