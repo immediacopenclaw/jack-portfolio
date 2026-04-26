@@ -119,30 +119,23 @@ a:hover { color: var(--muted); }
   color: var(--fg);
 }
 
-/* Menu button (hamburger) */
+/* Menu button (text) */
 .menu-btn {
   background: transparent;
   border: 0;
-  padding: 12px 4px;
+  padding: 8px 4px;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 32px;
-  align-items: flex-end;
+  font-family: inherit;
+  color: var(--fg);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: color 0.2s ease;
+  position: relative;
+  z-index: 60;
 }
-.menu-btn span {
-  display: block;
-  height: 1px;
-  background: var(--fg);
-  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
-}
-.menu-btn span:nth-child(1) { width: 24px; }
-.menu-btn span:nth-child(2) { width: 18px; }
-.menu-btn span:nth-child(3) { width: 24px; }
-.menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); width: 24px; }
-.menu-btn.open span:nth-child(2) { opacity: 0; }
-.menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); width: 24px; }
+.menu-btn:hover { color: var(--muted); }
 
 /* Menu panel */
 .menu-panel {

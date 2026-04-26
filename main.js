@@ -37,17 +37,20 @@ const menuBtn = document.getElementById('menu-btn');
 const menuPanel = document.getElementById('menu-panel');
 const filterIndicator = document.getElementById('filter-indicator');
 
+const menuBtnText = menuBtn?.querySelector('.menu-btn-text');
 function openMenu() {
   menuBtn.classList.add('open');
   menuPanel.classList.add('open');
   menuBtn.setAttribute('aria-expanded', 'true');
   menuPanel.setAttribute('aria-hidden', 'false');
+  if (menuBtnText) menuBtnText.textContent = menuBtnText.dataset.close || 'Close';
 }
 function closeMenu() {
   menuBtn.classList.remove('open');
   menuPanel.classList.remove('open');
   menuBtn.setAttribute('aria-expanded', 'false');
   menuPanel.setAttribute('aria-hidden', 'true');
+  if (menuBtnText) menuBtnText.textContent = menuBtnText.dataset.open || 'Menu';
 }
 menuBtn?.addEventListener('click', () => {
   menuPanel.classList.contains('open') ? closeMenu() : openMenu();
