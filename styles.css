@@ -82,9 +82,11 @@ a:hover { color: var(--muted); }
 .site-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   padding: var(--pad);
   padding-bottom: calc(var(--pad) / 2);
+  position: relative;
+  z-index: 50;
 }
 .brand {
   display: flex;
@@ -115,6 +117,102 @@ a:hover { color: var(--muted); }
 }
 .site-nav a:hover {
   color: var(--fg);
+}
+
+/* Menu button (hamburger) */
+.menu-btn {
+  background: transparent;
+  border: 0;
+  padding: 12px 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 32px;
+  align-items: flex-end;
+}
+.menu-btn span {
+  display: block;
+  height: 1px;
+  background: var(--fg);
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+}
+.menu-btn span:nth-child(1) { width: 24px; }
+.menu-btn span:nth-child(2) { width: 18px; }
+.menu-btn span:nth-child(3) { width: 24px; }
+.menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); width: 24px; }
+.menu-btn.open span:nth-child(2) { opacity: 0; }
+.menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); width: 24px; }
+
+/* Menu panel */
+.menu-panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 40;
+}
+.menu-panel.open {
+  opacity: 1;
+  visibility: visible;
+}
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.menu-list li { margin: 18px 0; }
+.menu-divider {
+  width: 40px;
+  height: 1px;
+  background: #333;
+  margin: 32px auto !important;
+}
+.menu-link {
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  color: var(--fg);
+  font-size: clamp(20px, 3vw, 28px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+  padding: 8px 16px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+.menu-link:hover,
+.menu-link.active {
+  opacity: 1;
+}
+
+/* Filter chips above grid (subtle indicator on main page) */
+.filter-indicator {
+  padding: 0 var(--pad);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: calc(var(--pad) / 2);
+  min-height: 14px;
+}
+
+/* Tile fade transition for filter */
+.tile {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.tile.hidden {
+  display: none;
 }
 
 /* Grid */

@@ -26,14 +26,24 @@
       <a href="/" class="brand-name">Jack Leahy</a>
       <span class="brand-role">Director of Photography</span>
     </div>
-    <nav class="site-nav">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
+  <nav class="menu-panel" id="menu-panel" aria-hidden="true">
+    <ul class="menu-list">
+      <li><button class="menu-link filter-btn active" data-filter="all">All Work</button></li>
+      <li><button class="menu-link filter-btn" data-filter="commercial">Commercial</button></li>
+      <li><button class="menu-link filter-btn" data-filter="narrative">Narrative</button></li>
+      <li class="menu-divider"></li>
+      <li><a class="menu-link" href="#about">About</a></li>
+      <li><a class="menu-link" href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <main>
+    <div class="filter-indicator" id="filter-indicator"></div>
     <section id="work" class="grid" aria-label="Selected work">
       <!-- Project tiles render here -->
     </section>
